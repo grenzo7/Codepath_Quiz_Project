@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-![Utsav](https://imgur.com/Z5AfxkI)
+![Utsav](https://imgur.com/a/TuO2sLa.gif)
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="a/Z5AfxkI" data-context="false" ><a href="//imgur.com/a/Z5AfxkI"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 <!-- Replace this with whatever GIF tool you used! -->
