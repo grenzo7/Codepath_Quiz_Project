@@ -30,9 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-![Utsav] <blockquote class="imgur-embed-pub" lang="en" data-id="a/TuO2sLa" data-context="false" ><a href="//imgur.com/a/TuO2sLa"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/Z5AfxkI" data-context="false" ><a href="//imgur.com/a/Z5AfxkI"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+![Utsav] <img src="https://i.imgur.com/xYg6uI2.gif" alt="Walkthrough">
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
 <!-- Recommended tools:
