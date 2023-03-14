@@ -1,135 +1,171 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 
+const questions = [
+  {
+    text: "What is the highest peak of the world?",
+    answer: "Mount Everest",
+    difficulty: 'easy'
+  },
+  {
+    text: "Which is the biggest country in the world?",
+    answer: "Russia",
+    difficulty: 'easy'
+
+  },
+  {
+    text: "Who is the vice president of the USA?",
+    answer: "Kamala Harris",
+    difficulty: 'medium'
+
+  },
+  {
+    text: "Is Pendrive a storage device?",
+    answer: "Yes",
+    difficulty: 'medium'
+  },
+  {
+    text: "How many bits make 1 byte?",
+    answer: "8 bits",
+    difficulty: 'hard'
+
+  },
+  {
+    text: "What is the full form of RAM?",
+    answer: "Random Access Memory",
+    difficulty: 'hard'
+
+  },
+  {
+    text: "Is Printer an example of output device?",
+    answer: "Yes",
+    difficulty: 'easy'
+
+  },
+  {
+    text: "Which electronic component was used in first generation of computer?",
+    answer: "Vacuum Tubes",
+    difficulty: 'hard'
+
+  },
+  {
+    text: "What is the full form of UN?",
+    answer: "United Nations",
+    difficulty: 'easy'
+
+  },
+  {
+    text: "When was IBM Computer invented?",
+    answer: "August 12, 1981",
+    difficulty: 'hard'
+  }
+]
 
 const App = () => {
+  const [index, setIndex] = useState(0)
+  const [showAnswer, setShowAnswer] = useState(false)
+  const [userGuess, setUserGuess] = useState('')
+  const [feedback, setFeedback] = useState('')
+  const [currentStreak, setCurrentStreak] = useState(0)
+  const [longestStreak, setLongestStreak] = useState(0)
 
-  const[index, setIndex] = useState(0);
+  useEffect(() => {
+    // Reset current streak and longest streak when index changes
+    setLongestStreak(Math.max(currentStreak, longestStreak))
+  }, [index])
+
+
+
+  const toggleQuestionAnswer = () => {
+    const questionBox = document.querySelector('.question-box');
+    questionBox.classList.toggle('show-answer');
+    setShowAnswer(!showAnswer);
+  };
   
+  
+
   const updateQuestionNum = () => {
-      setIndex(Math.floor(Math.random() * (9 - 1 + 1)) + 1);
+    setIndex((index + 1) % questions.length)
+    setShowAnswer(false)
+    setFeedback('')
   }
 
-  const[qa1,setQA1] = useState("Who is the father of Computer?");
-  const[qa2,setQA2] = useState("Who is the first computer programmer?");
-  const[qa3,setQA3] = useState("What is called the brain of Computer?");
-  const[qa4,setQA4] = useState("Is Pendrive a storage device?");
-  const[qa5,setQA5] = useState("How many bits make 1 byte?");
-  const[qa6,setQA6] = useState("What is the full form of RAM?");
-  const[qa7,setQA7] = useState("Is Printer an example of output device?");
-  const[qa8,setQA8] = useState("Which electronic component was used in first generation of computer?");
-  const[qa9,setQA9] = useState("What is the full form of ROM?");
-  const[qa10,setQA10] = useState("When was IBM Computer invented?");
+  const handleUserGuess = (e) => {
+    setUserGuess(e.target.value)
+  }
+
   
+  const shuffleCards = () => {
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    setIndex(randomIndex);
+    setShowAnswer(false);
+    setFeedback('');
+    setUserGuess('');
+    setCurrentStreak(0);
+  };
+  const handleUserSubmit = () => {
+    if (userGuess.toLowerCase().trim() === questions[index].answer.toLowerCase().trim() ) {
+      setFeedback(<p className="correct-feedback">Correct!</p>)
+      setCurrentStreak(currentStreak + 1)
+      setLongestStreak(Math.max(currentStreak + 1, longestStreak))
+      setUserGuess('')
+      if (index === questions.length - 1) {
+        setIndex(0)
+      } else {
+        setIndex(index + 1)
+      }
 
-
-  const updateQA1 = () => {
-    if (qa1 == "Who is the father of Computer?"){
-      setQA1("Charles Babbage");
-    }
-    else{
-      setQA1("Who is the father of Computer?");
-    }
-  }
-
-  const updateQA2 = () => {
-    if (qa2 == "Who is the first computer programmer?"){
-      setQA2("Lady Augusta Ada Lovelace");
-    }
-    else{
-      setQA2("Who is the first computer programmer?");
-    }
-  }
-
-  const updateQA3 = () => {
-    if (qa3 == "What is called the brain of Computer?"){
-      setQA3("CPU, Central Processing Unit");
-    }
-    else{
-      setQA3("What is called the brain of Computer?");
-    4
-  }
-}
-
-  const updateQA4 = () => {
-    if (qa4 == "Is Pendrive a storage device?"){
-      setQA4("Yes, It is.");
-    }
-    else{
-      setQA4("Is Pendrive a storage device?");
-    }
-  }
-
-  const updateQA5 = () => {
-    if (qa5 == "How many bits make 1 byte?"){
-      setQA5("8 bits");
-    }
-    else{
-      setQA5("How many bits make 1 byte?");
-    }
-  }
-
-  const updateQA6 = () => {
-    if (qa6 == "What is the full form of RAM?"){
-      setQA6("Random Access Memory");
-    }
-    else{
-      setQA6("What is the full form of RAM?");
-    }
-  }
-
-  const updateQA7 = () => {
-    if (qa7 == "Is Printer an example of output device?"){
-      setQA7("Yes, Printer is an output device");
-    }
-    else{
-      setQA7("Is Printer an example of output device?");
-    }
-  }
-
-  const updateQA8 = () => {
-    if (qa8 == "Which electronic component was used in first generation of computer?"){
-      setQA8("Vacuum Tubes");
-    }
-    else{
-      setQA8("Which electronic component was used in first generation of computer?");
-    }
-  }
-
-  const updateQA9 = () => {
-    if (qa9 == "What is the full form of ROM?"){
-      setQA9("Read Only Memory");
-    }
-    else{
-      setQA9("What is the full form of ROM?");
-    }
-  }
-
-  const updateQA10 = () => {
-    if (qa10 == "When was IBM Computer invented?"){
-      setQA10("August 12, 1981");
-    }
-    else{
-      setQA10("When was IBM Computer invented?");
+    } else {
+      setFeedback(<p className="incorrect-feedback">Incorrect, try again.</p>)
+      setCurrentStreak(0)
+      setUserGuess('')
     }
   }
 
 
-  const arrQuestion = [qa1, qa2, qa3, qa4, qa5, qa6, qa7, qa8, qa9, qa10];
-  const arrupdateAnswer = [updateQA1,updateQA2,updateQA3,updateQA4, updateQA5,updateQA6,updateQA7,updateQA8, updateQA9,updateQA10];
 
-  const arrBGColor = ["Green", "Yellow", "Red","Green", "Yellow", "Red","Green", "Yellow", "Yellow","Red"]
-  return(
+
+  const colorDict = {
+    easy: 'green',
+    medium: 'yellow',
+    hard: 'red'
+  }
+
+  const currentQuestion = questions[index]
+
+
+  return (
     <div className='wholebody'>
-      <Header/>
-
-      <div className= {arrBGColor[index]} onClick={arrupdateAnswer[index]}>
-          <h1>{arrQuestion[index]}</h1>
+      <Header />
+      {feedback && 
+        <h2 className='feedback-text'>{feedback}</h2>
+      }
+      <div className='question-container'>
+      <button className='shuffle-button' onClick={shuffleCards}>Shuffle</button>
+        <div className='question-box' style={{backgroundColor: colorDict[currentQuestion.difficulty]}} onClick={toggleQuestionAnswer}>
+          {!showAnswer && 
+            <h1 className='question-text'>{currentQuestion.text}</h1>}
+          {showAnswer && 
+            <h1 className='answer-text'>{currentQuestion.answer}</h1>
+          }
+        </div>
+        <div className='guess-container'>
+          <input type='text' value={userGuess} onChange={handleUserGuess} placeholder='Enter your guess...' className='guess-input' />
+          <button className='button guess-button' onClick={handleUserSubmit}>Submit</button>
+        </div>
       </div>
-      <button className = 'button' onClick={updateQuestionNum}>➡️</button>
+      <div className='button-container'>
+        {index > 0 &&
+          <button className='button' onClick={() => setIndex(index - 1)}>⬅️</button>
+        }
+        <button className='button' onClick={updateQuestionNum}>➡️</button>
+      </div>
+      <div className='streak-counter-container'>
+        <h3>Current streak: {currentStreak}</h3>
+        <h3>Longest streak: {longestStreak}</h3>
+      </div> 
     </div>
-  )
-}
-
-export default App;
+  )}
+  
+  export default App
